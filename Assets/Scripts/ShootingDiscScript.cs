@@ -28,7 +28,6 @@ public class ShootingDiscScript : MonoBehaviour
     public static event EventHandler OnShooting;
     public bool hasScored = false;
     private Rigidbody rb;
-
     private void Awake()
     {
         line = GetComponent<LineRenderer>(); //set line renderer
@@ -42,7 +41,7 @@ public class ShootingDiscScript : MonoBehaviour
         GameManager.SwitchToNextPlayer += ShootingDiscScript_OnSwitchToSecondPlayer;
     }
 
-   
+
     private void ShootingDiscScript_OnSwitchToSecondPlayer(object sender, EventArgs e)
     {
         gameObject.SetActive(false);
@@ -50,8 +49,8 @@ public class ShootingDiscScript : MonoBehaviour
         countOfTwos = 0;
         countOfThrees = 0;
         countOfFours = 0;
-        hasScored = false; 
-        isShot = false; 
+        hasScored = false;
+        isShot = false;
         ShowAimingDisc();
     }
     private void ShowAimingDisc()
@@ -154,8 +153,8 @@ public class ShootingDiscScript : MonoBehaviour
                 countOfFours++;
                 break;
         }
-        if (Array.TrueForAll<int>(new int[] { countOfOnes, countOfTwos, countOfThrees, countOfFours },
-       val => (countOfOnes == val) && (val != 0)))
+        if (countOfOnes == countOfTwos && countOfTwos == countOfThrees && countOfThrees == countOfFours &&
+      countOfOnes != 0 && countOfTwos != 0 && countOfThrees != 0 && countOfFours != 0)
         {
             OnAddBonusPoints?.Invoke(this, EventArgs.Empty);
         }
