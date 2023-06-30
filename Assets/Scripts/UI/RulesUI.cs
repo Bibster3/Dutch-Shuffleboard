@@ -7,7 +7,7 @@ public class RulesUI : MonoBehaviour
     public GameObject swipeObject;
     public float swipeSpeed = 5f;
     public float targetPosition;
-    public float swipeDistance = 920f;
+    public float swipeDistance;
     public float maxLeftPosition = -950f;
     public float maxRightPosition = -4750f;
     private void Awake()

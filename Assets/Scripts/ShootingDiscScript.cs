@@ -61,11 +61,13 @@ public class ShootingDiscScript : MonoBehaviour
     private void ShootingDiscScript_OnDiscResetForAnotherTurn(object sender, EventArgs e)
     {
         if ((hasScored == false) && (isShot == true))
+        
         {
             gameObject.SetActive(false);
             isShot = false;
         }
     }
+
     private void OnMouseDown()
     {
         if (isShot)
@@ -73,6 +75,7 @@ public class ShootingDiscScript : MonoBehaviour
         line.enabled = true; //enable toe first point of the line
         line.SetPosition(0, transform.position);  //the line begins at this target position
     }
+
     private void OnMouseDrag()
     {
         currentDistance = Vector3.Distance(currentMousePosition * speed, transform.position);         //update the current distcance
@@ -94,9 +97,11 @@ public class ShootingDiscScript : MonoBehaviour
         {
             currentMousePosition = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
         }
+
         shootDirection = Vector3.Normalize(currentMousePosition - transform.position);         //calculate the shoot Direction
         line.SetPosition(1, temp);         ///update the line while we drag
     }
+
     private void OnMouseUp()
     {
         if (isShot)
@@ -116,12 +121,14 @@ public class ShootingDiscScript : MonoBehaviour
             ShowAimingDisc();
         }
     }
+
     private IEnumerator DelayedExecution()
     {
         yield return new WaitForSeconds(2f);
         GameManager.Hits--;
         ShowAimingDisc();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         pointIndicators = other.GetComponentsInChildren<Renderer>();
@@ -165,6 +172,7 @@ public class ShootingDiscScript : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         renderer.material.color = Color.white;
     }
+
     private void OnDestroy()
     {
         GameManager.DiscResetForAnotherTurn -= ShootingDiscScript_OnDiscResetForAnotherTurn;
